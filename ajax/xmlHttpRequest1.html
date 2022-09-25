@@ -11,6 +11,58 @@
     <h1>Estados</h1>
 
     <script>
-        // ...
+        function ajax(config) { //o objeto config tem alguns parâmetros que será utilizado por exemplo o URL, Método chamado caso dê tudo certo,método chamado caso dê erro, etc..
+            const xhr = new XMLHttpRequest() //é comum encontrar o nome da variável assim [x de xml, h de http e r de request]
+            xhr.open(config.metodo, config.url, true) //open -> abrir requisição. .metodo -> método que irei usar. config.url -> tentando chamar o parâmetro url do objeto config para saber qual url eu quero usar nesta requisição. true -> quero que seja feito de forma assícrona.
+
+            xhr.onload = e => {
+                if (xhr.status === 200){ //se a requisição foi bem sucedida
+                    config.sucesso(xhr.response) //quero que retorne a resposta de sucesso
+                } else if (xhr.status >= 400){ // se a requisição foi maç sucedida
+                    config.erro({
+                        code: xhr.status, //passar o status de erro
+                        text: xhr.statusText //passar o texto do erro
+                    })
+                }
+            }
+
+            xhr.send(); //para mandar a requisição
+        }
+        
+        //normalmente num sistema manual, só basta o comando após esta linha
+        ajax({
+            url: "dados/estados.json",
+            metodo: "GET",
+            sucesso(resposta){ //recebeu a resposta
+                const estados = JSON.parse(resposta) //.parse para fazer uma tabela
+
+                const linhas = estados.map(estado =>{ //recebendo uma lista de estados. .map é para conseguir converter array em qualquer outro tipo de dado
+                    const tdId = document.createElement('td') //td = table data
+                    tdId.innerHTML = estado.id //adicionou os id's no tdId
+
+                    const tdnome = document.createElement('td')
+                    tdnome.innerHTML = estado.nome //adicionou os nomes no tdnome
+
+                    const tdsigla = document.createElement('td')
+                    tdsigla.innerHTML = estado.sigla //adicionar as siglas no tdsigla
+
+                    const tr = document.createElement('tr') //tr = linha da tabela
+
+                    tr.appendChild(tdId)
+                    tr.appendChild(tdnome)
+                    tr.appendChild(tdsigla)
+
+                    return tr
+                })
+
+                const tabela = document.createElement('table') //table = tabela
+                linhas.forEach(linha => tabela.appendChild(linha)) //adicionando os dados em linha
+                document.body.appendChild(tabela) //adicionar um body a tabela
+            },
+            erro (e){ //caso dê algum erro
+                const msg = document.createTextNode(`${e.code}: ${e.text}`)
+                document.body.appendChild(msg)
+            }
+        })
     </script>
 </body>
