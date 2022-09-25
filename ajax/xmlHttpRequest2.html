@@ -22,6 +22,37 @@
     <div class="progresso"></div>
 
     <script>
-        // ...
+        function ajaxUpload(config){
+            const xhr = new XMLHttpRequest()
+
+            if (xhr.upload){ //se existir o upload ele executa este if
+                xhr.upload.onprogress = e => { //onprogress serve para monitorar o upload (dá pra saber quantos % foi enviado do arquivo, por exemplo)
+                    const atual = e.loaded
+                    const total = e.total
+                    const percentual = Math.floor(atual / total * 100) //saber o percentual de envio
+                    config.progresso(atua, total, percentual)
+                }
+            }
+
+            xhr.open("post", config.url, true) //método post por que está enviando dados para o servidor
+            xhr.send(config.formData)
+            
+        }
+
+        document.querySelector('input[type=file]').onchange = e => { //seleciona o input do tipo file, pra quando acionado ele executar o evento
+            const formData = new formData()
+            formData.append(e.target.name, e.target.files[0]) 
+            //e.target é o envio do input do tipo file. o e.target.name é para pegar o nome do input, no exeplo é "arquivo" para receber o input certo
+
+            ajaxUpload({
+                url: "upload", //mesmo nome da rota do server.js (linha 28)
+                formData: formData, //basicamente para receber o arquivo do queryselector enviado pelo input
+                progresso(dados){ //função progresso que recebe os dados, utilizado nesta função agora
+                    const progresso = document.querySelector('.progresso') //pegou a div com a classe progresso
+                    progresso.innerHTML = JSON.stringify(dados) //pegando os dados que recebeu //stringify para converter para string
+                }
+            })
+        }
+        
     </script>
 </body>

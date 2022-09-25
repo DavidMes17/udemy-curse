@@ -16,14 +16,24 @@ const multer = require('multer') //interpretar o formulário do arquivo de uploa
 
 const storage = multer.diskStorage({ //não é necessário fazer esta função, mas é normalmente usada para personalizar a pasta onde onde será salvo os arquivos e manipular o nome dos arquivos na hora de salvar
     destination: function (req, file, callback) {
-        callback(null, './upload') //armazenar os arquivos na pasta upload
+        callback(null, '/upload') //armazenar os arquivos na pasta upload
     },
     filename: function (req, file, callback) {
         callback(null, `${Date.now()}_${file.originalname}`) //definindo o nome do arquivo para salvar com a data atual, e após o nome original do arquivo
     }
 })
 
-const upload = multer({ storage }).single('arquivo') //função para salvar os arquivos, e o arquivo é o parâmetro da requisição
+const upload = multer({ storage }).single('arquivo') //função para salvar os arquivos, e o arquivo é o campo do imput
+
+app.post('/upload', (req,res) => { //rota do tipo post
+    upload(req, res, err => {
+        if(err){ //se der erro
+            return res.end('Ocorreu um erro!') //foi usado return para dar um "break" caso seja executado
+        }
+
+        res.end('Concluído com sucesso!')
+    })
+})
 
 app.listen(8000, () => console.log('Executando com sucesso!'));
 //para usar estes comandos em algum servidor, no meu caso na porta 8000 e o console.log para mostrar que funcionou
