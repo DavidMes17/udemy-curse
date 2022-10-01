@@ -1,6 +1,5 @@
 const {series} = require('gulp')
 const gulp = require('gulp')
-const gsass = require('gulp-sass')
 const sass = require('gulp-sass')(require('sass'))
 const uglifycss = require('gulp-uglifycss')
 const concat = require('gulp-concat')
