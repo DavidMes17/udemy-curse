@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.static('.')) //prover os arquivo estáticos a partir da criação do middleware
 app.use(bodyparser.urlencoded({ extended: true })); //se vier como submit do formulário, este comando irá transformar em objeto
-app.use('/link', bodyparser.urlencoded({ extended: true })); //caso queira atribuir o comando a algum link da página
+/* app.use('/link', bodyparser.urlencoded({ extended: true })); */ //caso queira atribuir o comando a algum link da página
 app.use(bodyparser.json()); //transformar o json em objeto
 
 app.get('/hoje', (req, res) => res.send(new Date)); //função middleware para métodos do tipo GET [localhost:8000/hoje]{fará a função funcionar}
@@ -32,6 +32,19 @@ app.post('/upload', (req,res) => { //rota do tipo post
         }
 
         res.end('Concluído com sucesso!')
+    })
+})
+app.post('/formulario', (req, res) => {
+    res.send({
+        ...res.body, //recebendo os dados backend
+        id: 1 //retornar o objeto mais o id
+    })
+})
+app.get('/parOuImpar', (req, res) => { //link de ref. /:numero após o url /parOuImpar
+    //formas de receber dados do backend => req.body(/Number numero) || req.query(numero=Number) || req.params(numero=Number)
+    const par = parseInt(req.query.numero) % 2 === 0
+    res.send({
+        resultado: par ? 'par' : 'ímpar'
     })
 })
 

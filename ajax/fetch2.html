@@ -29,6 +29,23 @@
     </form>
     <div id="resultado"></div>
     <script>
-        // ...
+        document.usuarioForm.onSubmit = async e => { //na hora que salvar vai funcionar o evento onSubmit
+            e.preventDefault() //para eu mesmo manipular a requisição
+            const form = e.target
+            const data = new FormData(form)
+            data.append('ajax', true)
+
+            const options = {
+                method: form.method, //para pegar o método selecionado
+                body: new URLSearchParams(data)
+            }
+
+            fetch(form.action, options)
+            .then(resp => resp.json())
+            .then (json=>{
+                const resultado = document.getElementsById('resultado')
+                resultado.innerHTML = JSON.stringify(json)
+            })
+        }
     </script>
 </body>

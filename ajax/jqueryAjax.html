@@ -14,6 +14,34 @@
     <div id="post"></div>
 
     <script>
-        // ...
+        function exibirResultado(id, dados){
+        const text = JSON.stringify(dados)
+        document.getElementsById(id).innerHTML = texto
+        }
+
+        //$.ajax ou jQuery.ajax
+        $.ajax({
+            url: 'parOuImpar',
+            data: { //dados que serão enviados ao servidor
+                numero: 5
+            },
+            success(data){
+                exibirResultado('get', data)
+            }
+        })
+
+        $.ajax({
+            url: 'formulario',
+            method: 'post',
+            data: {
+                nome: 'João',
+                sobrenome: 'Silva'
+            },
+            success(data){
+                exibirResultado('post', data)
+            }, error(e){
+                exibirResultado('post', e)
+            }
+        })
     </script>
 </body>

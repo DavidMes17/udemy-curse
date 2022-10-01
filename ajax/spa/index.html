@@ -20,11 +20,39 @@
 
 <body class="conteudo">
     <nav>
-        <a href wm-link="series.html" wm-destino=".pagina">Séries</a> |
+        <a href wm-link="series.html" wm-destino=".pagina">Séries</a> <!-- wm-link : "pegar os dados de" || wm-destino : "enviar os dados para esta div com esta classe" -->
         <a href wm-link="linguagens.html" wm-destino=".pagina">Linguagens</a>
     </nav>
     <div class="pagina"></div>
     <script>
-        // ...
+        function navegarViaAjax(url, seletor, push = true){
+            if (!url || !seletor) return //se não tiver url nem seletor, não retorna nada
+            const elemento = document.querySelector(seletor)
+        fetch(url)
+        .then(resp => resp.text()) //.text() para pegar os textos do html
+        .then(html => {
+            elemento.innerHTML = html
+
+            if(push){
+                history.pushState({ seletor }, null, url) //este push é para abrir as requisições ajax em links para salvar no histórico
+            }
+        })
+        }
+
+        document.querySelectorAll('[wm-link]'). forEach(link => {
+            const url = link.attributes['wm-link'].value
+            const seletorDestino = linkAttributes['wm-destino'].value
+
+            link.onclick = e => {
+                e.preventDefault()
+                navegarViaAjax(url, seletorDestino)
+            }
+        })
+
+        windows.onpopstate = e => {
+            if(e.state){
+                navegarViaAjax(window.location.href, e.state.seletor, false)
+            }
+        }
     </script>
 </body>
