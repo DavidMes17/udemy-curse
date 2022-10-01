@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>anotações</title>
+	<style type="text/css">
+		*{font-family: monospace;}
+	</style>
+<link rel="shortcut icon" type="image/x-icon" href="icon.jpg">
+</head>
+<body>
+
+	<h1>Anotações</h1>
+		<h2>Babel</h2>
+		<p>Serve para "converter" qualquer comando JavaScript para outro na qual muitos browser's consigam suportar</p>
+		<br>
+	<h2>Node com TS</h2>
+		<p>O Node precisa que o TypeScript seja convertido para JS para funcionar</p>
+		<br>
+	<h2>SASS</h2>
+		<p>É o CSS com pré-processamento</p>
+		<br>
+	<h4>observação sobre sass</h4>
+<p>
+Devido às novas versões do SASS, ao tentar instalá-lo com os arquivos disponibilizados no curso, um pequeno erro pode vir a acontecer. Para resolver é bem simples, basta seguir esses passos:
+<br>
+1 - Delete a pasta node_modules do seu projeto
+<br>
+2 - Abra o arquivo package.json
+<br>
+3 - Dentro do arquivo, procure nas dependências a linha referente ao node-sass e/ou sass e delete a linha
+<br>
+4 - Salve o arquivo
+<br>
+5 - Use o comando npm install no seu projeto normalmente
+<br>
+6 - Agora utilize o comando npm install node-sass gulp-sass --save-dev
+<br>
+<br>
+Com isso o problema deve ser corrigido.
+<br>
+Bons estudos!
+</p>
+<br>
+	<h2>Error: const sass = require('gulp-sass')(require('sass'));</h2>
+<p>
+Nas versões mais recentes se você até ler, diz que gulp-sass não é mais o compilador Sass padrão e a gente tem que importar o Sass.
+<br>
+Copia e cola ai:
+<br>
+<strong>const sass = require('gulp-sass')(require('sass'))</strong>
+<br>
+Se você estiver com outro problema, só que dizendo que ele não conseguiu encontrar o módulo Sass, faça o download do Sass:
+<br>
+<strong>npm i sass</strong>
+</p>
+<br>
+</body>
+</html>

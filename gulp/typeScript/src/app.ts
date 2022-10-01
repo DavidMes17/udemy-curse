@@ -1,4 +1,4 @@
-import { Carro, Vendavel } from './produto'
+import { Carro, Vendavel } from './produto' //import para importar o export do outro arquivo
 
 function exibir(v: Vendavel) {
     console.log(`${v.nome} custa ${v.preco}!`)
