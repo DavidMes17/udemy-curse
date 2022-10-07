@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "gulp": "^4.0.2"
+  },
+  "name": "udemy-curse",
+  "description": "Curso Web Moderno Completo com JavaScript 2022 + Projetos",
+  "version": "1.0.0",
+  "main": "fonte.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidMes17/udemy-curse.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidMes17/udemy-curse/issues"
+  },
+  "homepage": "https://github.com/DavidMes17/udemy-curse#readme"
+}
