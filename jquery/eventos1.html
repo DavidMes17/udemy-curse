@@ -20,6 +20,37 @@
     <input type="text" placeholder="Cor de Background">
 
     <script>
-        // ...
+        function mostraPosicaoMouse(e){
+            $('#posicao').html(`x: ${e.clientX} y: ${e.clientY}`)
+        }
+
+        //.on é para registrar algum evento no JQuery
+        $('body').on('mousemove', mostraPosicaoMouse) 
+
+        $('#posicao').mouseover(e => { //quando o mouse estiver sobrepondo o elemento selecionado
+            $('body').off('mousemove', mostraPosicaoMouse) //ele para de analisar o movimento do mouse e registra a posição
+        })
+
+        $('#posicao').mouseleave(e => { //quando o mouse não sobrepor mais o elemento
+            $('body').mousemove(mostraPosicaoMouse) //ele reativa a análise e registro da posição do mouse
+            //mesmo comando -> $('body').on('mousemove', mostraPosicaoMouse)
+        })
+
+        let cliques = 0
+        $('body').click(e => {
+            $('#cliques').html(`Cliques: ${++cliques}`)
+        })
+
+        const backgroundOriginal = $('body').css('background-color')
+
+        $('input').keyup(function (e){ //.keyup é para salvar a letra que for digitada instantaneamente
+            console.log(e.target.value)
+                const valor = $(this).val()
+                if(valor.match(/#[\da-fA-F]{3,6}/)){ //se começar com #, se os dígitos forem a-f, A-F e entre 3 ou 6 dígitos de cada, será true
+                    $('body').css('background-color', valor)
+            }else {
+                $('body').css('background-color', backgroundOriginal)
+            }
+        })
     </script>
 </body>

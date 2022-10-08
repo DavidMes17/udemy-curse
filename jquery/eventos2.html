@@ -21,6 +21,31 @@
     <input type="text" placeholder="Digite e Selecione">
     <div id="resultado2">?</div>
     <script>
-        // ...
+        const alternarDestaque = () => $('#div1').toggleClass('destaque')
+        $('#div1').hover(alternarDestaque, alternarDestaque) //.hover é um evento que realiza o evento quando o mouse sobrepõe e se evasa 
+        //se tiver um parâmetro, ele realiza 2 vezes. se tiver dois, ele realiza o primeiro com o mouse encima, e realiza o outro com o mouse evasado respectivo
+        //funciona a base de toogle, se não tiver feito antes ele será true, se já tiver feito será false
+        /**
+         * é o equivalente a;
+         * $('#div1').on('mouseenter mouseleave', alternarDestaque)
+         */
+        
+        $('#div1').one('mouseenter', e => alert('Aviso Importante: Obrigado!')) //.one é para o evento ocorrer apenas uma única vez
+        $('#div1').dblclick(e => $('#div1').fadeOut(1000).fadeIn(1000))
+        //.dblclick (ATENÇÃO!!! começa com DBL) para acionar um evento de double clique, e no caso acima fará a div sumir e desaparecer com um tempo de 1 segundo
+
+
+        $(window).resize(function (e){ //toda vez que alterar a tela do browser, fará a função
+            const largura = $(window).width()
+            const altura = $(window).height()
+            //ambos da janela
+                $('#resultado1').html(`Largura -> ${largura} / Altura -> ${altura}`)
+        })
+
+        $(':input').select(e => { //lê o que está selecionado
+            const inicio = e.target.selectionStart //recebe o início da seleção
+            const fim = e.target.selectionEnd //recebe o fim da seleção
+            $('#resultado2').html(e.target.value.substring(inicio, fim)) //exibir o que está selecionado
+        })
     </script>
 </body>

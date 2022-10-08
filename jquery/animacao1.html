@@ -23,6 +23,17 @@
     <div id='animar'>Animar!</div>
 
     <script>        
-        // ...
+        $('button').click(e => {
+            const tempo = 450
+            //transição de esconder e aparecer
+            $('#animar').hide(tempo).show(tempo) //demora o tempo definido em milisegundos na const tempo para esconder e aparecer respectivamente
+            $('#animar').toggle(tempo).toggle(tempo) //se estiver aparecendo ele vai esconder, se estiver escondido ele vai aparecer
+            //some, e aparece
+            $('#animar').fadeOut(tempo).fadeIn(tempo)
+            $('#animar').fadeToggle(tempo).fadeToggle(tempo)
+            //"deslizada"
+            $('#animar').slideUp(tempo).slideDown(tempo)
+            $('#animar').slideToggle(tempo).slideToggle(tempo)
+        })
     </script>
 </body>

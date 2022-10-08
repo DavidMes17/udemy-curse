@@ -15,6 +15,22 @@
     <div id='div3'>3</div>
     <div id='resultado'></div>
     <script>
-        // ...
+        const fonte = $('#div1').css('font-family') //neste momento ele está lendo o atributo e o css incluído no elemento
+        $('#resultado').append(`A fonte é -> ${fonte}`)
+
+        $('#div1').css('font-size', '3em') //neste momento ele está modificando/adicionando atributo, por ter atributo inserido no comando JQuery
+        $('#div1').css({'font-size': '3.5em', 'color': 'yellow'}) //para adicionar/alterar mais de um atributo no mesmo elemento
+        $('#div1').css('font-size', function(){
+            return `${2 * 2}em`
+        })
+
+        $('#div2').addClass('destaque')
+
+        const temClase = $('#div2').hasClass('destaque')
+        $('#resultado').append(`<br>class ? -> ${temClase}`)
+
+        $('#div2').removeClass('destaque')
+        $('#div2').toggleClass('destaque') //se tiver apenas um toogleClass, ele adicionará a classe
+        $('#div2').toggleClass('destaque') //se tiver repetido o toggleClass, como no exemplo tem um acima, ele remove a classe
     </script>
 </body>
