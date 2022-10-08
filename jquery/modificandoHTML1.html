@@ -13,8 +13,44 @@
     <div id='conteudo1'></div>
     <div id='conteudo2'></div>
     <div id='conteudo3'></div>
+    <div>Sem Id</div>
 
     <script>
-        // ...
+        //conteúdo 1
+        $('#conteudo1').append('<p>1</p>') //adicionou o parágrafo com caractere 1 na div
+
+        //conteudo 2
+        const elementos =[
+            //$('li') selecionando elementos
+            // $('<li>') criando elementos
+
+            $('<li></li>').append('Arroz'),
+            $('<li>').append('Feijão'),
+            $('<li>').append('Carne')
+        ]
+
+        const lista = $('<ul> <li>Sorvete</li> </ul>').append(elementos) //adiciona os atributos da const elementos na const lista
+                                                    //se digitar prepend no lugar de append, os elementos ficarão por cima do que já estava na definido
+        $('#conteudo2').append(lista)
+
+        //conteudo 3
+        $('#conteudo3').append('<h1>1</h1>')
+            .append('<h1>2</h1>').prepend('<h1>0</h1>')
+        /*
+         * outras formas de fazer
+         *
+         * array
+         * $('#conteudo3').append(['<h1>1</h1>', '<h1>2</h1>'])
+         *   .prepend('<h1>0</h1>')
+         *
+         * objeto
+         * $('#conteudo3').append('<h1>1</h1>', '<h1>2</h1>')
+         *   .prepend('<h1>0</h1>')
+         */
+        $('#conteudo3').html('<h1>123</h1>') //ao invés de adicionar elementos como append/prepend, html() substitui elementos
+        $('#conteudo3').text('<h1>123</h1>') //adiciona um texto sem interpretar html, ou seja, aqui irá aparecer como string->("<h1>123</h1>")
+
+        //selecionando todos
+        $('div[id]').html('<strong>Todos!</strong>') //seleciona todas as div com elemento id
     </script>
 </body>

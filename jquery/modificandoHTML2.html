@@ -17,6 +17,32 @@
     <p class='numero'>5</p>
 
     <script>
-        // ...
+        $('#div1').append(', 2')
+        $('#div1').prepend('0, ')
+
+        $('<span>, 3</span>').appendTo('#div1')
+        $('<span>-1, </span>').prependTo('#div1')
+        //por este método ser mais "genérico", faz-se necessário de definição de tag para não ocorrer erros
+
+        $('#div2').before('<p>Antes 2</p>') //ele fica fora e antes do elemento selecionado
+        $('#div2').after('<p>Depois 2</p>') //ele fica fora e depois do elemento selecionado
+
+        $('<p>Antes 3</p>').insertBefore('#div3')
+        $('<p>Depois 3</p>').insertAfter('#div3')
+
+        $('p.numero').wrap('<div>') //adiciona todos os elementos <p> com classe numero em uma div para cada elemento
+        $('p.numero').wrapAll('<div class="div4">') //adiciona todos os elementos <p> com classe numero para uma única div com classe ("div4")
+
+        $("#div4").empty() //a div4 continua existindo, mas fica vazia, sem nenhum elemento dentro (display: none)
+        $('#div3, #div4').prev().remove() //pegando os elementos anteriores as div's 3 e 4 e remover (delete)
+        //recomenda-se usar o esconder, pra caso precise retorná-lo não será necessário recriá-lo
+
+        $('<div>Substituto</div>').replaceAll('body > p') //substitui todos os parágrafos do <body> pela <div> substituto
+        $('body > p').replaceWith('<div>Substituto</div>')
+        //replace com callback
+        $('body > p').replaceWith(function(){
+            return ('<div>').html($(this).html()).append('!!!') //this => pegando o elemento atual do seletor, colocou dentro da função JQuery e adiciona o html dentro do html da div que quer colocar
+
+        })     
     </script>
 </body>

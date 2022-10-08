@@ -81,6 +81,24 @@
         <p>Cod3r Ensino</p>
     </footer>
     <script>
-        // ...
+        const comBorda = {'border': 'solid 8px orange'}
+        const semBorda = {'border': 'none'}
+
+        $('a[href="#link3"]').parent().css(comBorda).css(semBorda) //parent para acessar o elemento pai, ou seja, ele adicionou o comBorda no <li> 
+
+        $('li:last').prev().css(comBorda) //prev() para pegar o anterior à ele
+        $('a[href="#link3"]').parent().next().css(comBorda).css(semBorda) //.next para selecionar o próximo elemento (no caso selecionará o elemento pai <li> após o definido no $())
+        $('a[href="#link1"]').parents().css(comBorda).css(semBorda) //o parents no plural serve para selecionar todos os elementos pai até chegar no html
+        $('a[href="#link1"]').parentsUntil('body').css(comBorda).css(semBorda) //definindo que pegou até o elemento pai <body>, mas não o afeta
+
+        $('main').children().css(comBorda).css(semBorda) //pega todos os elementos filhos de main
+        $('body').find('a').css(comBorda).css(semBorda) //pega todos os elementos <a> de body
+
+
+        const elementoDOM = document.getElementsByClassName('menu')
+        $(elementoDOM).css(comBorda).css(semBorda) //equivalente a $('menu').css(...)
+
+        $('main').children().each((i, e) => $(e).css(comBorda).css(semBorda))
+        $('li').each((i,e) => $(e).css(comBorda).css(semBorda))
     </script>
 </body>
